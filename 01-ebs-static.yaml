@@ -35,7 +35,7 @@ metadata:
     project: roboshop
 spec:
   nodeSelector:
-    topology.kubernetes.io/zone: us-east-1c
+    topology.kubernetes.io/zone: us-east-1c   # availability zone of node, create volume in that AZ only then only it can be attached to Pod
   containers:
   - name: nginx
     image: nginx
