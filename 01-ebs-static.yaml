@@ -11,7 +11,7 @@ spec:
   csi:
     driver: ebs.csi.aws.com
     fsType: ext4
-    volumeHandle: vol-072a8f44214a23f64
+    volumeHandle: vol-072a8f44214a23f64 # this can be taken from AWS, after creating EBS volume of 20GB volume name
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim
@@ -19,7 +19,7 @@ metadata:
   name: ebs-static
 spec:
   storageClassName: "" # Empty string must be explicitly set otherwise default StorageClass will be set
-  volumeName: ebs-static
+  volumeName: ebs-static    #volume name from PV, 15GB volume is claiming from above 20GB of PV
   accessModes:
     - ReadWriteOnce
   resources:
