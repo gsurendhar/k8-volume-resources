@@ -1,0 +1,68 @@
+# 1. Install EFSCSIDriver
+# 2. Provide access to EC2 instance through role EFSCSIDriverPolicy
+# 3. Create EFS Volume
+# 4. In EFS Security Group Add 2049 from Instance so add source as Instance_id
+# 5. Create PV, PVC and mount to pod
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: efs-static
+spec: 
+  capacity: 5Gi
+  volumeMode: Filesystem
+  accessModes:
+    - ReadWriteOnce
+  storageClassName: ""
+  persistentVolumeReclaimPolicy: Retain
+  csi:
+    driver: efs.csi.aws.com
+    volumeHandle: fs-073d77123471b2917 # AWS EFS Volume id
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: efs-static
+spec:
+  accessModes: 
+  - ReadWriteOnce
+  storageClassName: ""
+  resources:
+    requests:
+      storage: 5Gi
+---
+apiVersion: v1
+kind: Pod
+metadata: 
+  name: efs-static-nginx
+  labels:
+    purpose: efs-static-demo
+    project: roboshop
+spec:
+  containers:
+  - name: nginx-efs
+    image: nginx
+    volumeMount: 
+    - name: persistent-storage-efs
+      mountPath: /usr/share/nginx/html
+  volumes:
+  - name: persistent-storage-efs
+    persistentVolumeClaim: 
+      claimName: efs-static
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: efs-static-demo
+  labels:
+    purpose: efs-static-demo
+    project: roboshop
+spec:
+  type: LoadBalancer
+  selector:
+    purpose: efs-static-demo
+    project: roboshop
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 80    
+    
