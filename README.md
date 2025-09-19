@@ -1,18 +1,18 @@
 # Kubernetes Volume Resources: EBS & EFS Provisioning
-
+---
 This repository contains basic to intermediate-level notes on how Kubernetes handles storage using **Persistent Volumes**, **Claims**, and **StorageClasses**, with examples focused on  provisioning **Amazon Elastic Block Store (EBS)** and **Elastic File System (EFS)** volumes in a Kubernetes cluster, both statically and dynamically. These methods allow your pods to have persistent storage in the cloud using Amazon Web Services (AWS).
 ---
 ## Table of Contents
 
-* [Types of Storage](#Types-of-Storage)
-* [Overview](#overview)
+* [Types of Storage](#types-of-storage)
 * [Overview](#overview)
 * [Prerequisites](#prerequisites)
 * [Static EBS Provisioning](#static-ebs-provisioning)
 * [Dynamic EBS Provisioning](#dynamic-ebs-provisioning)
 * [Static EFS Provisioning](#static-efs-provisioning)
 * [Dynamic EFS Provisioning](#dynamic-efs-provisioning)
-* [Contributing](#contributing)
+* [Troubleshooting](#troubleshooting)
+* [References](#references)
 
 ## 📦 Types of Storage
 
@@ -138,13 +138,13 @@ Refer to the official documentation for [EBS CSI Driver](https://kubernetes.io/d
    spec:
      capacity:
        storage: 10Gi
-     volumeMode: Filesystem
      accessModes:
        - ReadWriteOnce
      persistentVolumeReclaimPolicy: Retain
      storageClassName: ebs-sc
      csi:
        driver: ebs.csi.aws.com
+       fsType: ext4
        volumeHandle: <volume-id>
    ```
 
@@ -464,4 +464,4 @@ For more details or to contribute, visit the GitHub repository:
 
 ---
 
-This README should now provide a complete guide for your users to follow along with both static and dynamic provisioning for EBS and EFS in Kubernetes, along with all the necessary configuration files and steps. Let me know if you need any further adjustments!
+This README should now provide a complete guide for both static and dynamic provisioning for EBS and EFS in Kubernetes, along with all the necessary configuration files and steps. Let me know if you need any further adjustments!
