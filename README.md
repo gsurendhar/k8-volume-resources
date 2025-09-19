@@ -1,5 +1,6 @@
 # Kubernetes Volume Resources: EBS & EFS Provisioning
 ---
+
 This repository contains basic to intermediate-level notes on how Kubernetes handles storage using **Persistent Volumes**, **Claims**, and **StorageClasses**, with examples focused on  provisioning **Amazon Elastic Block Store (EBS)** and **Elastic File System (EFS)** volumes in a Kubernetes cluster, both statically and dynamically. These methods allow your pods to have persistent storage in the cloud using Amazon Web Services (AWS).
 ---
 ## Table of Contents
