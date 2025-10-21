@@ -7,7 +7,7 @@ spec:
     - ReadWriteOnce
   storageClassName: roboshop-efs
   resources: 
-    request:
+    requests:
       storage: 4Gi
 ---
 apiVersion: v1
@@ -26,7 +26,7 @@ spec:
       mountPath: /usr/share/nginx/html
   volumes:
     - name: persistent-volumes-efs
-      PersistentVolumeClaim:
+      persistentVolumeClaim:
         claimName: efs-dynamic
 ---
 apiVersion: v1

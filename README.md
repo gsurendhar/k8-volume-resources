@@ -76,6 +76,9 @@ Refer to the official documentation for [EBS CSI Driver](https://kubernetes.io/d
 # Static EBS Provisioning
 
 * 1. Install EBSCSIDriver
+```
+kubectl apply -k "github.com/kubernetes-sigs/aws-ebs-csi-driver/deploy/kubernetes/overlays/stable/?ref=release-1.40"
+```
 * 2. Provide access to EC2 instance through role EBSCSIDriverPolicy
 * 3. Create Volume in same AZ as in EC2 Instance 
 * 4. Create PV, PVC and create pod with nodeSelector option and volumeMount
