@@ -8,7 +8,8 @@ kind: PersistentVolume
 metadata:
   name: efs-static
 spec: 
-  capacity: 5Gi
+  capacity:
+    storage: 5Gi
   volumeMode: Filesystem
   accessModes:
     - ReadWriteOnce
@@ -41,7 +42,7 @@ spec:
   containers:
   - name: nginx-efs
     image: nginx
-    volumeMount: 
+    volumeMounts: 
     - name: persistent-storage-efs
       mountPath: /usr/share/nginx/html
   volumes:
