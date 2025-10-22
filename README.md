@@ -77,7 +77,7 @@ Refer to the official documentation for [EBS CSI Driver](https://kubernetes.io/d
 
 * 1. Install EBSCSIDriver
 ```
-kubectl apply -k "github.com/kubernetes-sigs/aws-ebs-csi-driver/deploy/kubernetes/overlays/stable/?ref=release-1.40"
+kubectl apply -k "github.com/kubernetes-sigs/aws-ebs-csi-driver/deploy/kubernetes/overlays/stable/?ref=release-1.43"
 ```
 * 2. Provide access to EC2 instance through role EBSCSIDriverPolicy
 * 3. Create Volume in same AZ as in EC2 Instance 
@@ -115,6 +115,14 @@ kubectl apply -k "github.com/kubernetes-sigs/aws-ebs-csi-driver/deploy/kubernete
 1. **Install the EBS CSI Driver**
 
    Follow the official AWS documentation to install the [EBS CSI driver](https://docs.aws.amazon.com/eks/latest/userguide/ebs-csi.html).
+
+   ```
+   kubectl kustomize \
+    "github.com/kubernetes-sigs/aws-efs-csi-driver/deploy/kubernetes/overlays/stable/ecr/?ref=release-2.1" > private-ecr-driver.yaml
+   ```
+   ```
+   kubectl apply -f private-ecr-driver.yaml
+   ```
 
 2. **Provide Access to EC2 Instance**
 
